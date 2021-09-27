@@ -22,11 +22,11 @@ def home(request):
         form = PlayerForm(request.POST, request.FILES)
         if form.is_valid():
             try:
-                # form.save()
+                form.save()
                 factory = qrcode.image.svg.SvgImage
                 first_name = form.cleaned_data['first_name'] 
                 last_name = form.cleaned_data['last_name']
-                profile_pic =  "https://ici-community/static/images/".format(form.cleaned_data['profile_picture'])
+                profile_pic =  "https://ici-community.herokuapp.com/static/images/".format(form.cleaned_data['profile_picture'])
                 qr_text = "{},{},{}".format(first_name, last_name, profile_pic)
                 img = qrcode.make(qr_text, image_factory=factory, box_size=20)
                 stream = BytesIO()
