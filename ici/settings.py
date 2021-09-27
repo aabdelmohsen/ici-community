@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-gj0+wc90-b$8y027kvc_vd+=$05ehh1#!02=q0!0)5_+gigh0-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'ici-sport.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'ici-community.herokuapp.com']
 
 
 # Application definition
