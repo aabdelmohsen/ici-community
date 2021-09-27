@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+{% block title %} Result {% endblock %}
+{% block content %}
+
+{% if messages %}
+        {% for message in messages %}
+            <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+{% endif %}
+
+<br/>
+
+<div class="input-group mb-3">
+    <div style="margin: auto">
+      <!-- {{ qr|safe }} -->
+      <img
+        src="{{qr|safe}}"
+        class="img-fluid shadow-2-strong"
+        alt=""
+      />
+    </div>
+   
+
+    <br/>
+    <div class="container-fluid p-0">
+        <div class="alert alert-warning alert-dismissible" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            Please save the QR code on your device, as you are going to use it to enter the ICI sport hall.
+        </div>
+    </div>
+  </div>
+
+<br/>
+<h4><a href = "/">Go back to home page</a></h4>
+
+{% endblock %}

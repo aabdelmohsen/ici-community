@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+{% block title %} ICI Registration {% endblock %}
+{% block content %}
+
+<div class="form-group">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <br/><br/>
+    <button type="submit" class="btn btn-primary">Register</button>
+
+</form>
+</div>
+
+
+{% endblock %}
