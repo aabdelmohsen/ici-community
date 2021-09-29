@@ -43,6 +43,7 @@ ALLOWED_HOSTS = ['localhost', 'ici-community.herokuapp.com']
 
 INSTALLED_APPS = [
     'sport.apps.SportConfig',
+    'bootstrap_datepicker_plus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,15 +83,36 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ici.wsgi.application'
 
+# Use BOOTSTRAP3 if you are using Bootstrap 3
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+ICI_DB_NAME = os.environ['ICI_DB_NAME']
+ICI_DB_HOST = os.environ['ICI_DB_HOST']
+ICI_DB_USER = os.environ['ICI_DB_USER']
+ICI_DB_PASS = os.environ['ICI_DB_PASS']
+
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':ICI_DB_NAME,
+      'USER':ICI_DB_USER,
+      'PASSWORD':ICI_DB_PASS,
+      'HOST':ICI_DB_HOST,
+      'PORT':'5432',
+   }
 }
 
 
