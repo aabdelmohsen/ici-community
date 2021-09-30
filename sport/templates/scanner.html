@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+{% block title %} Result {% endblock %}
+{% block content %}
+
+{% if messages %}
+        {% for message in messages %}
+            <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+{% endif %}
+
+
+<div class="input-group mb-3">
+    <div style="margin: auto">
+        <form method="POST" name="myform" id="myform" >
+            {% csrf_token %}
+            {{ scannerForm.as_p }}
+        </form>
+
+    <br/><br/>
+    <div class="container-fluid p-0">
+        <label style="font-weight: bold;">First Name: </label> &emsp; <label>{{ player.first_name }}</label> 
+        <br/> <br/>  
+        <label style="font-weight: bold;">Last Name: </label> &emsp; <label>{{ player.last_name }}</label>     
+        <br/><br/>  
+        <img src="https://ici-community.herokuapp.com/static/images/{{ player.profile_picture }}" class="img-thumbnail"/>
+    </div>
+
+    <br/><br/><br/><br/><br/>
+<h5><a href = "/">Go back to home page</a></h5>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function() {
+        console.log( "ready!" );
+        $('#id_ID').focus(); 
+    });
+
+    function validate_then_submit() {
+        var valid = false;
+        if (valid == true) {
+            document.forms['myform'].submit();
+        }
+    }   
+</script>
+
+{% endblock %}
