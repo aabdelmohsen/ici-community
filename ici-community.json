@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ici-community",
+  "private_key_id": "dc602985618644d16c6f5162d043e68a3a7150a1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDOsyImcU9fuUlY\nIWneWJSfMDoge8U4zTJMgk5Eq08OoWEEiZqNq/EAqVItw/fI/kP03EBelQHbNpj/\nnlO1Icx5rsbN1sH7ciXA2MwCPut4mL34+QSuuNKVmPSpqoscmv6jJIZ5uiGVCmlA\nBIkTFHz+9tYIRw5pf/cJWkyVmxcu4z2s6G5tT6okSxScBRTIQVm1AuqS37Mql6AE\njS0aAFa4LobfR1/C/f7fpYTOLgeLrGOTGovh/6Xmbh1ejEABlsGY7tu7dbwRLuuF\n2GXU/F1Ny8HS//L37KmSkCGh+/x2bYY9Z7S3ZlmfPdvDFp4orNBYSAVg18pln1hs\ncVfA6rohAgMBAAECggEAEUgPfjX8XufM5rNpzeSLYyvTEE2I1buXjadaB9+9bQm3\nuiYPEp03jx3uTak+xEKN8qD043ODLjgds/F21NljO8vjDz6kr/Mr4428sMtgleVK\nAiY/v/lFPKtceVBVmn9S9Czk7rR4g6TVMTxagYqK+34uXY7N+QAb6rTusOtrQB4q\ngf3FmqItSITAgwfw5/sLRWug8FrIckzGS7vo1pUyl9wpZ61ZQdkP7yz4lRjclGSv\nSiRSdHcbQ2ujrNu9rK4e3nRePQCmw8McUFSABwzU8xbEh8QkRr2UtElt3Sd8hfVU\nDoTNhXlb7DsNTxZtDgBfBqKj2Rh+SNL0fG+2oMJbaQKBgQDuxAF1WmJIrySx2ow1\nmQj5cbYieUbrE49pWDUgtwf9rtHWcW1apj2AmbseslkS4YUcmvy3uSuufuLRs6aj\ns+eNfUhRn+LUryt+XgcZkjMt4PLEOPaj34gMb4PbP2ulVTcXUrAeg+Gtd9bHVguW\n0N3Pk9ErNCXOWr6IK4flbh+n4wKBgQDdnppOneLDaic9q14WiXTWOjGqqqG+6ce9\n7B/FAUpVv3H/RUM5In/Pdo5+jmL4t6yyM7gyv5IKSUn9nsbX3l+Usz/IfnzE2i+H\nCLHKjZ+6aIgGfCJ5WibX6wnujavD3CJ/joMSB7cQ31guhVmzQaCblcJEvfNUWJBk\nYzoZgBENKwKBgQDDZKPM5aqI0Mu2wKL9Ob+eYvAqRhVDSz6Rdx4DJ8XiVK5kT26u\nQF0UYLpA5LMAQI4uWqd1spOMuUnlUp+MWC2mHGCSa8W1R6TQRSKKSpqXcP86lWNB\nuCweASRmx//PzWzIKWL3lfWZf/jEKCZTxZm/xbfnI0XNGXXS+cy8dOJzAQKBgQCz\njk7jJ1SUkysb8f4XMGMzNo8LAZhuv6aPoAHVccgyVRwdgJaIcgUvp5SnwOE7NkV7\nVCAHLeM65kpGbCAawhaauegRnzmjnEspksfJnpktRIgBCQ49V+dkxQ+U8b+avn5M\n7sAPGaUezHX7qxsT+zYPGHT/kQ7W5bKHQ0XNZ09pZQKBgGc+h52myTS917BjVaja\nvpdF1oQdxxByfyVoD/lRHd3VZ5RAJb2bQ0gfqPVQc7qAIQ7CEkNe/ctMnpexbYQu\nRL8yR2U1lIyJDF+CdT9UnUjnVixlGGJm7tJN5dN3KOKEUTrKRUO/Wvdc4aqQA2Bu\n3fBjuCxqMparnrCTEzX+gr0z\n-----END PRIVATE KEY-----\n",
+  "client_email": "ici-community@ici-community.iam.gserviceaccount.com",
+  "client_id": "108041674450745032976",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ici-community%40ici-community.iam.gserviceaccount.com"
+}

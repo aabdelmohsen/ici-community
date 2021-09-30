@@ -67,7 +67,7 @@ def scanner(request):
     if obj is None:
         profile_image = "profile_icon.png"
     else:
-        profile_image = obj.profile_picture
+        profile_image = '{}{}'.format(settings.MEDIA_URL, obj.profile_picture)
 
     context = {
         'player' : obj,

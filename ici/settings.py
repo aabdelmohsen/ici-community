@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from google.oauth2 import service_account
+
 
 # Connect Bootstrap alerts to Django message tags
 MESSAGE_TAGS = {
@@ -165,11 +167,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'irvingislamiccenter@gmail.com'
-EMAIL_HOST_PASSWORD = 'irvingislamiccenter@2021'
-EMAIL_USE_TLS = True
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, 'ici-community.json')
+)
+
+ ###configuration for media file storing and reriving media file from gcloud 
+DEFAULT_FILE_STORAGE='ici.gcloud.GoogleCloudMediaFileStorage'
+GS_PROJECT_ID = 'ici-community'
+GS_BUCKET_NAME = 'ici_community'
+MEDIA_ROOT = "media/images"
+UPLOAD_ROOT = 'media/images/'
+MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+
+
