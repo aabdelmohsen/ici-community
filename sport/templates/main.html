@@ -10,6 +10,18 @@
     {{ form.media }}  
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>{% block title %} {% endblock %}</title>
+    <style >
+        input[type=checkbox] {
+            transform: scale(1.5);
+        }
+        label[for="id_vaccinated"]{
+            font-weight: bold;
+        }
+        label[for="id_disclaimer"]{
+            font-weight: bold;
+        }
+    
+    </style>
 </head>
 
 <body>

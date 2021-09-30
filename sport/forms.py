@@ -15,14 +15,16 @@ class PlayerForm(ModelForm):
             'address' : forms.TextInput(attrs={'required': True, 'class': 'form-control'}),
             'email' : forms.EmailInput(attrs={'required': True, 'class': 'form-control'}),
             'gender' : forms.RadioSelect(),
-            # 'date_of_birth' : forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'mm/dd/yyyy'}),
             'date_of_birth' : DatePickerInput(format='%m/%d/%Y'),
             'vaccinated' : forms.CheckboxInput(attrs={'class' : 'custom-checkbox checkbox-xl'}),
             'emergency_contact_name' : forms.TextInput(attrs={'required': True, 'class': 'form-control'}),
             'emergency_contact_phone' : forms.TextInput(attrs={'required': True, 'class': 'form-control'}),
-            'profile_picture' : forms.ClearableFileInput(attrs={'required': True, 'class': 'form-control'})
+            'profile_picture' : forms.ClearableFileInput(attrs={'required': True, 'class': 'form-control'}),
+            'disclaimer' : forms.CheckboxInput(attrs={'required': True, 'class' : 'custom-checkbox checkbox-xl'})
         }
 
         labels = {
-            "vaccinated": "Check if you are vaccinated "
+            "vaccinated" : "Check if you are vaccinated",
+            "disclaimer" : "Release of Liability and COVID-19 Related Information",
+            "profile_picture" : "Attach a clear image of your face. Please do not attach avatar image! "
         }   
