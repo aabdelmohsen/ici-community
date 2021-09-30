@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import CreateView
 from .forms import PlayerForm
+from .forms import ScannerForm
 from .models import Player
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
@@ -25,7 +26,8 @@ def home(request):
                 player = form.save()
                 factory = qrcode.image.svg.SvgImage
                 profile_pic =  "https://ici-community.herokuapp.com/static/images/{}".format(player.profile_picture)
-                qr_text = "{},{},{},{}".format(player.id, player.first_name, player.last_name, profile_pic)
+                # qr_text = "{},{},{},{}".format(player.id, player.first_name, player.last_name, profile_pic)
+                qr_text = "{}".format(player.id)
                 img = qrcode.make(qr_text, image_factory=factory, box_size=20)
                 stream = BytesIO()
                 img.save(stream)
@@ -42,6 +44,31 @@ def home(request):
     
     context = {'form': form}
     return render(request, 'registration.html', context)
+
+
+def scanner(request):
+    scannerForm = ScannerForm()
+    obj = None
+    print('Scanner In Progress :::::::::::::::::::')
+    if request.method == "POST":
+        scannerForm = ScannerForm(request.POST)
+        if scannerForm.is_valid():
+            try:
+                playerId = request.POST['ID']
+                print(" Scanned ID ::::::::::: {}".format(playerId))
+                obj = Player.objects.get(id=playerId)
+                print(obj)
+            except Exception as e:
+                    print('ERROR  :::::::: {}'.format(e))
+                    messages.error(request, 'User not found :( ! ')
+        else:
+            messages.error(request, 'User not found :( ! ')
+    
+    context = {
+        'player' : obj,
+        'scannerForm' : scannerForm
+    }
+    return render(request, 'scanner.html', context)
 
 
 # def result(request):

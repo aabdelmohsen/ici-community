@@ -28,3 +28,13 @@ class PlayerForm(ModelForm):
             "disclaimer" : "Release of Liability and COVID-19 Related Information",
             "profile_picture" : "Attach a clear image of your face. Please do not attach avatar image! "
         }   
+
+
+class ScannerForm(forms.Form):
+    ID = forms.CharField(max_length=100)
+    # widgets = {
+    #         'ID' : forms.TextInput(attrs={'required': True, 'class': 'form-control', 'onChange':'validate_then_submit()'})
+    #     }
+    # class Meta:
+        # fields = ['id']   
+        
