@@ -24,12 +24,12 @@
         </form>
 
     <br/><br/>
-    <div class="container-fluid p-0">
+    <div>
         <label style="font-weight: bold;">First Name: </label> &emsp; <label>{{ player.first_name }}</label> 
         <br/> <br/>  
         <label style="font-weight: bold;">Last Name: </label> &emsp; <label>{{ player.last_name }}</label>     
         <br/><br/>  
-        <img src="https://ici-community.herokuapp.com/static/images/{{ player.profile_picture }}" class="img-thumbnail"/>
+        <img src="https://ici-community.herokuapp.com/static/images/{{ player.profile_picture }}" class="rounded" width="304" height="236"/>
     </div>
 
     <br/><br/><br/><br/><br/>
@@ -42,7 +42,9 @@
 
     $(function() {
         console.log( "ready!" );
+        $("input:text").val("");
         $('#id_ID').focus(); 
+
     });
 
     function validate_then_submit() {
