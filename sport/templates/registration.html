@@ -15,6 +15,7 @@
             </div>
         {% endfor %}
     {% endif %}
+    <label><u>*All inputs are required*</u></label><br/>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
