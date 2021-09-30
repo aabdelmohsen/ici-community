@@ -64,9 +64,15 @@ def scanner(request):
         else:
             messages.error(request, 'User not found :( ! ')
     
+    if obj is None:
+        profile_image = "profile_icon.png"
+    else:
+        profile_image = obj.profile_picture
+
     context = {
         'player' : obj,
-        'scannerForm' : scannerForm
+        'scannerForm' : scannerForm,
+        'profile_image' : profile_image
     }
     return render(request, 'scanner.html', context)
 

@@ -15,26 +15,41 @@
         {% endfor %}
 {% endif %}
 
-
 <div class="input-group mb-3">
     <div style="margin: auto">
         <form method="POST" name="myform" id="myform" >
             {% csrf_token %}
             {{ scannerForm.as_p }}
         </form>
+        <br/><br/>
+</div>
 
-    <br/><br/>
-    <div>
-        <label style="font-weight: bold;">First Name: </label> &emsp; <label>{{ player.first_name }}</label> 
-        <br/> <br/>  
-        <label style="font-weight: bold;">Last Name: </label> &emsp; <label>{{ player.last_name }}</label>     
-        <br/><br/>  
-        <img src="https://ici-community.herokuapp.com/static/images/{{ player.profile_picture }}" class="rounded" width="304" height="236"/>
+
+<div class="container justify-content-center">
+
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <br/><br/>
+            <label style="font-weight: bold;">First Name: </label> &emsp; <label>{{ player.first_name }}</label> 
+            <br/><br/><br/>
+            <label style="font-weight: bold;">Last Name: </label> &emsp; <label>{{ player.last_name }}</label>     
+        </div>
+        <div class="col-6">
+            <img src="http://localhost:8000/static/images/{{ profile_image }}" class="rounded" width="304" height="236"/>
+        </div>
     </div>
 
-    <br/><br/><br/><br/><br/>
-<h5><a href = "/">Go back to home page</a></h5>
+    <div class="row">
+        <div class="col-5">
+            <br/><br/><br/>
+            <h6><a href = "/">&emsp;&emsp; Go back to home page</a></h6>
+        </div>
+    </div>
+    
 </div>
+
+
+
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
