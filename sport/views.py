@@ -65,7 +65,7 @@ def scanner(request):
             messages.error(request, 'User not found :( ! ')
     
     if obj is None:
-        profile_image = "profile_icon.png"
+        profile_image = '{}{}'.format(settings.MEDIA_URL, "profile_icon.png")
     else:
         profile_image = '{}{}'.format(settings.MEDIA_URL, obj.profile_picture)
 
