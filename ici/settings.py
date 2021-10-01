@@ -90,6 +90,9 @@ BOOTSTRAP4 = {
     'include_jquery': True,
 }
 
+# FILE_UPLOAD_HANDLERS = [
+#     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+# ]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
