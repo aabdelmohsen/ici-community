@@ -37,7 +37,7 @@ def home(request):
                 qr = 'data:image/svg+xml;utf8;base64,' + base64_image
                 messages.success(request, 'Registration completed successfully!')
                 return render(request, 'result.html', {'qr': qr})
-                # return render(request, 'result.html', {'qr': stream.getvalue().decode()})
+                
             except BadHeaderError:
                 messages.error(request, 'Registration failed! Please try again later.')
         else:

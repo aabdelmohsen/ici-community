@@ -27,7 +27,7 @@ class Player(models.Model):
     disclaimer = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.id + ' :::: ' + self.first_name + ' :::: ' + self.last_name
+        return self.first_name + ' :::: ' + self.last_name
 
 
 
@@ -37,6 +37,4 @@ class Daily_Scan(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     scan_date = models.DateField(default=date.today)
     scan_timestamp = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.player + ' ::: ' + self.scan_date
+    
