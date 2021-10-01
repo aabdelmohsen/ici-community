@@ -1,5 +1,13 @@
 from django.db import models
 from django.utils import timezone
+from datetime import date
+import barcode
+from barcode.writer import ImageWriter
+from io import BytesIO
+from django.core.files import File
+import qrcode
+import qrcode.image.svg
+import base64
 
 class Player(models.Model):
     first_name = models.CharField(max_length=250)
@@ -15,7 +23,20 @@ class Player(models.Model):
     emergency_contact_phone = models.CharField(max_length=100)
     profile_picture = models.ImageField(default='')
     registeration_date = models.DateTimeField(default=timezone.now)
-    qr_code = models.CharField(max_length=1000, null=True)
+    qr_code = models.ImageField(default='')
     disclaimer = models.BooleanField(default=False)
+
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.id + ' :::: ' + self.first_name + ' :::: ' + self.last_name
+
+
+
+
+
+class Daily_Scan(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    scan_date = models.DateField(default=date.today)
+    scan_timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.player + ' ::: ' + self.scan_date

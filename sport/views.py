@@ -5,6 +5,7 @@ from django.views.generic import CreateView
 from .forms import PlayerForm
 from .forms import ScannerForm
 from .models import Player
+from .models import Daily_Scan
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
@@ -14,6 +15,7 @@ from io import BytesIO
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 import base64
+
 
 def home(request):
     form = PlayerForm()
@@ -25,13 +27,12 @@ def home(request):
             try:
                 player = form.save()
                 factory = qrcode.image.svg.SvgImage
-                profile_pic =  "https://ici-community.herokuapp.com/static/images/{}".format(player.profile_picture)
+                # profile_pic =  "https://ici-community.herokuapp.com/static/images/{}".format(player.profile_picture)
                 # qr_text = "{},{},{},{}".format(player.id, player.first_name, player.last_name, profile_pic)
                 qr_text = "{}".format(player.id)
                 img = qrcode.make(qr_text, image_factory=factory, box_size=20)
                 stream = BytesIO()
                 img.save(stream)
-
                 base64_image = base64.b64encode(stream.getvalue()).decode()
                 qr = 'data:image/svg+xml;utf8;base64,' + base64_image
                 messages.success(request, 'Registration completed successfully!')
@@ -48,29 +49,34 @@ def home(request):
 
 def scanner(request):
     scannerForm = ScannerForm()
-    obj = None
+    player = None
     print('Scanner In Progress :::::::::::::::::::')
     if request.method == "POST":
         scannerForm = ScannerForm(request.POST)
         if scannerForm.is_valid():
             try:
+                
                 playerId = request.POST['ID']
                 print(" Scanned ID ::::::::::: {}".format(playerId))
-                obj = Player.objects.get(id=playerId)
-                print(obj)
+                player = Player.objects.get(id=playerId)
+                
+                # Create and save player in daliy_scan table
+                daily_scan = Daily_Scan.objects.create(player=player)
+                print('daily_scan saved successfully ############## ')
+
             except Exception as e:
                     print('ERROR  :::::::: {}'.format(e))
-                    messages.error(request, 'User not found :( ! ')
+                    messages.error(request, 'Something went wrong, please make sure User Id is correct :( ! ')
         else:
-            messages.error(request, 'User not found :( ! ')
+            messages.error(request, 'Value is invalid! ')
     
-    if obj is None:
+    if player is None:
         profile_image = '{}{}'.format(settings.MEDIA_URL, "profile_icon.png")
     else:
-        profile_image = '{}{}'.format(settings.MEDIA_URL, obj.profile_picture)
+        profile_image = '{}{}'.format(settings.MEDIA_URL, player.profile_picture)
 
     context = {
-        'player' : obj,
+        'player' : player,
         'scannerForm' : scannerForm,
         'profile_image' : profile_image
     }
@@ -92,3 +98,28 @@ def scanner(request):
 #     messages.error(request, 'Registration failed! Please try again later.')
 # else:
 # messages.error(request, 'Registration failed! Please try again later.')
+
+
+# from django.core.files import File
+# from django.core.files.images import ImageFile
+# import pyqrcode
+# # player.qr_code = File(stream)
+# # player.qr_code = ImageFile(open(File(stream), "rb"))
+# img_name = '{}-{}.png'.format(player.id, player.first_name)
+
+
+# qr = qrcode.QRCode(
+#     version=1,
+#     error_correction=qrcode.constants.ERROR_CORRECT_L,
+#     box_size=20,
+#     border=4,
+# )
+# qr.add_data(qr_text)
+# qr.make(fit=True)
+# filename = img_name
+# img_test = qr.make_image()
+# img_test.save(settings.MEDIA_URL)
+# player.qr_code.save(img_name, img_test, save=False)
+
+# # player.qr_code.save(img_name,  File(base64_image) , save=False)  
+# player.save()

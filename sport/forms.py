@@ -31,7 +31,7 @@ class PlayerForm(ModelForm):
 
 
 class ScannerForm(forms.Form):
-    ID = forms.CharField(max_length=100)
+    ID = forms.CharField(max_length=100, required=True)
     # widgets = {
     #         'ID' : forms.TextInput(attrs={'required': True, 'class': 'form-control', 'onChange':'validate_then_submit()'})
     #     }
