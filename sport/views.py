@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import CreateView
+from django.views.generic import ListView
 from .forms import PlayerForm
 from .forms import ScannerForm
 from .models import Player
@@ -81,6 +82,35 @@ def scanner(request):
         'profile_image' : profile_image
     }
     return render(request, 'scanner.html', context)
+
+
+def getqrcode(request, id=None):
+    try:
+        print('Generating QR Code for Player  ID :::::  {}'.format(id))
+        factory = qrcode.image.svg.SvgImage
+        qr_text = "{}".format(id)
+        img = qrcode.make(qr_text, image_factory=factory, box_size=20)
+        stream = BytesIO()
+        img.save(stream)
+        base64_image = base64.b64encode(stream.getvalue()).decode()
+        qr_code = 'data:image/svg+xml;utf8;base64,' + base64_image
+        messages.success(request, 'QR code generated successfully!')
+    except Exception as e:
+        print('ERROR  :::::::: {}'.format(e))
+
+    context = {
+        'qr_code' : qr_code
+    }
+    return render(request, 'getqrcode.html', context)
+                
+
+
+
+
+class PlayerList(ListView):
+    model = Player
+
+
 
 
 # def result(request):

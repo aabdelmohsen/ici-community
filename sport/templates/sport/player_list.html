@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+{% block title %} Result {% endblock %}
+{% block content %}
+
+<div class="container">
+    <h2>All Players</h2>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <br>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for player in object_list %}
+            <tr>
+                <td>{{ player.id }}</td>
+                <td>{{ player.first_name }}</td>
+                <td>{{ player.last_name }}</td>
+                <td> <a href="/getqrcode/{{ player.id }}" target="_blank">Get QR Code</a> </td>
+            </tr>
+        {% endfor %}
+       
+      </tbody>
+    </table>
+    </div>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+  
+  {% endblock %}

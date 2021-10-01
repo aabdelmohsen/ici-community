@@ -27,7 +27,7 @@ class Player(models.Model):
     disclaimer = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.first_name + ' :::: ' + self.last_name
+        return str(self.id) + '::' +self.first_name + ' :: ' + self.last_name + '::' + self.mobile
 
 
 
