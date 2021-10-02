@@ -8,6 +8,15 @@ from django.core.files import File
 import qrcode
 import qrcode.image.svg
 import base64
+import uuid
+import os
+
+def rename_profile_image(instance, filename):
+    print('Original file name :::::::::::::: {}'.format(filename))
+    new_file_name = '{}-{}.png'.format(instance.first_name, uuid.uuid4())
+    print('new file name :::::::::::::: {}'.format(new_file_name))
+    return new_file_name
+
 
 class Player(models.Model):
     first_name = models.CharField(max_length=250)
@@ -21,7 +30,7 @@ class Player(models.Model):
     vaccinated = models.BooleanField(default=False)
     emergency_contact_name = models.CharField(max_length=250)
     emergency_contact_phone = models.CharField(max_length=100)
-    profile_picture = models.ImageField(default='')
+    profile_picture = models.ImageField(default='', upload_to=rename_profile_image)
     registeration_date = models.DateTimeField(default=timezone.now)
     qr_code = models.ImageField(default='')
     disclaimer = models.BooleanField(default=False)

@@ -16,7 +16,7 @@ from io import BytesIO
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 import base64
-
+import time
 
 def home(request):
     form = PlayerForm()
@@ -28,8 +28,6 @@ def home(request):
             try:
                 player = form.save()
                 factory = qrcode.image.svg.SvgImage
-                # profile_pic =  "https://ici-community.herokuapp.com/static/images/{}".format(player.profile_picture)
-                # qr_text = "{},{},{},{}".format(player.id, player.first_name, player.last_name, profile_pic)
                 qr_text = "{}".format(player.id)
                 img = qrcode.make(qr_text, image_factory=factory, box_size=20)
                 stream = BytesIO()

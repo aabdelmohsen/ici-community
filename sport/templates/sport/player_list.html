@@ -12,6 +12,8 @@
           <th>ID</th>
           <th>First Name</th>
           <th>Last Name</th>
+          <th>Mobile</th>
+          <th>Photo</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -20,6 +22,8 @@
                 <td>{{ player.id }}</td>
                 <td>{{ player.first_name }}</td>
                 <td>{{ player.last_name }}</td>
+                <td>{{ player.mobile }}</td>
+                <td><img src="https://storage.googleapis.com/ici_community/{{ player.profile_picture }}" class="rounded" width="304" height="236"/></td>
                 <td> <a href="/getqrcode/{{ player.id }}" target="_blank">Get QR Code</a> </td>
             </tr>
         {% endfor %}
