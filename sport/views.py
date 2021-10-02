@@ -65,9 +65,9 @@ def scanner(request):
 
             except Exception as e:
                     print('ERROR  :::::::: {}'.format(e))
-                    messages.error(request, 'Something went wrong, please make sure User Id is correct :( ! ')
+                    messages.error(request, 'Something went wrong, please make sure Player Id is correct :( ! ', extra_tags='scanner')
         else:
-            messages.error(request, 'Value is invalid! ')
+            messages.error(request, 'Value is invalid! ', extra_tags='scanner')
     
     if player is None:
         profile_image = '{}{}'.format(settings.MEDIA_URL, "profile_icon.png")

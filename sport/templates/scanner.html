@@ -1,17 +1,41 @@
 {% extends "main.html" %}
-{% block title %} Result {% endblock %}
+{% block title %} Scanner {% endblock %}
 {% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li>
+            <img src="https://irvingmasjid.org/wp-content/uploads/2021/05/cropped-ICI-Logo.png" width="100" height="50" class="d-inline-block align-top" alt="">
+        </li>
+        <li class="nav-item active">
+            &emsp;&emsp;&emsp;
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">ICI Registration</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/scanner">ICI Scanner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/player_list">All Players</a>
+        </li>
+      </ul>
+    </div>
+</nav>
 
 {% if messages %}
         {% for message in messages %}
-            <div class="container-fluid p-0">
-                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ message }}
+            {%if "scanner" in message.tags %}
+                <div class="container-fluid p-0">
+                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
 {% endif %}
 

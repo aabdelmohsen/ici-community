@@ -1,6 +1,28 @@
 {% extends "main.html" %}
-{% block title %} Result {% endblock %}
+{% block title %} All Players {% endblock %}
 {% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li>
+        <img src="https://irvingmasjid.org/wp-content/uploads/2021/05/cropped-ICI-Logo.png" width="100" height="50" class="d-inline-block align-top" alt="">
+      </li>
+      <li class="nav-item">
+        &emsp;&emsp;&emsp;
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/">ICI Registration</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/scanner">ICI Scanner</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/player_list">All Players</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <div class="container">
     <h2>All Players</h2>
@@ -14,6 +36,7 @@
           <th>Last Name</th>
           <th>Mobile</th>
           <th>Photo</th>
+          <th>QR Code</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -23,8 +46,8 @@
                 <td>{{ player.first_name }}</td>
                 <td>{{ player.last_name }}</td>
                 <td>{{ player.mobile }}</td>
-                <td><img src="https://storage.googleapis.com/ici_community/{{ player.profile_picture }}" class="rounded" width="304" height="236"/></td>
-                <td> <a href="/getqrcode/{{ player.id }}" target="_blank">Get QR Code</a> </td>
+                <td><a href="https://storage.googleapis.com/ici_community/{{ player.profile_picture }}" target="_blank" class="badge badge-info">View</a></td>
+                <td> <a href="/getqrcode/{{ player.id }}" target="_blank" class="badge badge-info">Generate</a> </td>
             </tr>
         {% endfor %}
        
