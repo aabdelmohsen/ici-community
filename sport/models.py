@@ -26,18 +26,25 @@ class Player(models.Model):
     email = models.EmailField(max_length=250)
     CHOICES = [('Male', 'Male'), ('Female', 'Female')]
     gender = models.CharField(max_length=10, choices=CHOICES, default='Male')
-    date_of_birth = models.DateField(null=True)
+    plus21 = models.BooleanField(default=False)
+    date_of_birth = models.DateField(null=True, blank=True)
     vaccinated = models.BooleanField(default=False)
     emergency_contact_name = models.CharField(max_length=250)
     emergency_contact_phone = models.CharField(max_length=100)
     profile_picture = models.ImageField(default='', upload_to=rename_profile_image)
     registeration_date = models.DateTimeField(default=timezone.now)
-    qr_code = models.ImageField(default='')
+    qr_code = models.CharField(max_length=20)
     disclaimer = models.BooleanField(default=False)
 
     def __str__(self):
         return 'ID: ' + str(self.id) + '  :::::  First Name: ' + self.first_name + '  :::::  Last Name: ' + self.last_name + '  :::::  Mobile: ' + str(self.mobile)
 
+    def clean_date_of_birth(self):
+        bdate = self.cleaned_data['date_of_birth']
+        if self.plus21 == 'on':
+            return null
+        else:
+            return bdate
 
 
 

@@ -15,7 +15,9 @@ class PlayerForm(ModelForm):
             'address' : forms.TextInput(attrs={'required': True, 'class': 'form-control'}),
             'email' : forms.EmailInput(attrs={'required': True, 'class': 'form-control'}),
             'gender' : forms.RadioSelect(),
+            'plus21' : forms.CheckboxInput(attrs={'class' : 'custom-checkbox checkbox-xl', 'required': False}),
             'date_of_birth' : DatePickerInput(format='%m/%d/%Y'),
+            # 'date_of_birth' : forms.DateField(required= False, widget=DatePickerInput(format='%m/%d/%Y')),
             'vaccinated' : forms.CheckboxInput(attrs={'class' : 'custom-checkbox checkbox-xl'}),
             'emergency_contact_name' : forms.TextInput(attrs={'required': True, 'class': 'form-control'}),
             'emergency_contact_phone' : forms.TextInput(attrs={'required': True, 'class': 'form-control'}),
@@ -24,8 +26,9 @@ class PlayerForm(ModelForm):
         }
 
         labels = {
-            "vaccinated" : "Check if you are vaccinated",
-            "disclaimer" : "Release of Liability and COVID-19 Related Information",
+            "plus21" : "Check this if you are 21+ ",
+            "vaccinated" : "Check this if you are vaccinated",
+            "disclaimer" : "Release of Liability and COVID-19 Related Information (Required)",
             "profile_picture" : "Attach a clear image of your face. Please do not attach avatar image! "
         }   
 

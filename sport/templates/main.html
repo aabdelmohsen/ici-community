@@ -20,7 +20,9 @@
         label[for="id_disclaimer"]{
             font-weight: bold;
         }
-    
+        label[for="id_plus21"]{
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -43,7 +45,22 @@
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker1').datetimepicker();
+
+            $("#id_plus21").click(function () {
+                if ($(this).is(":checked")) {
+                    $('.date').hide();
+                    $('#id_date_of_birth').prop('required', false);
+                    $('#id_date_of_birth').val('01/01/1950');
+                    $('label[for="id_date_of_birth"]').hide();
+                } else {
+                    $('.date').show();
+                    $('#id_date_of_birth').val('');
+                    $('#id_date_of_birth').prop('required', true);
+                    $('label[for="id_date_of_birth"]').show();
+                }
+            });
         });
+
      </script>
 
 </body>

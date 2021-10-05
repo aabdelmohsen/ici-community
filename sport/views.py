@@ -37,9 +37,11 @@ def home(request):
                 messages.success(request, 'Registration completed successfully!')
                 return render(request, 'result.html', {'qr': qr})
                 
-            except BadHeaderError:
+            except Exception as e:
+                print('ERROR  :::::::: {}'.format(e))
                 messages.error(request, 'Registration failed! Please try again later.')
         else:
+            print('Form is not valid ::::::: {}'.format(form.is_valid()))
             messages.error(request, 'Registration failed! Please try again later.')
     
     context = {'form': form}
@@ -108,8 +110,13 @@ def getqrcode(request, id=None):
 class PlayerList(ListView):
     model = Player
 
+    
 
 
+
+# plus21 = request.POST.get('plus21', False)
+# print('plus21 :::::: {}'.format(plus21))
+# print('birth date  :::::: {}'.format(request.POST['date_of_birth']))
 
 # def result(request):
 #     return render(request, 'result.html', context)
