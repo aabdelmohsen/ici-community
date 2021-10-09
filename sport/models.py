@@ -26,9 +26,12 @@ class Player(models.Model):
     email = models.EmailField(max_length=250)
     CHOICES = [('Male', 'Male'), ('Female', 'Female')]
     gender = models.CharField(max_length=10, choices=CHOICES, default='Male')
-    plus21 = models.BooleanField(default=False)
+    Q_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
+    # plus21 = models.BooleanField(default=False)
+    plus21 = models.CharField(max_length=10, choices=Q_CHOICES, default='No')
     date_of_birth = models.DateField(null=True, blank=True)
-    vaccinated = models.BooleanField(default=False)
+    vaccinated = models.CharField(max_length=10, choices=Q_CHOICES, default='No')
+    # vaccinated = models.BooleanField(default=False)
     emergency_contact_name = models.CharField(max_length=250)
     emergency_contact_phone = models.CharField(max_length=100)
     profile_picture = models.ImageField(default='', upload_to=rename_profile_image)

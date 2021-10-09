@@ -23,6 +23,12 @@
         label[for="id_plus21"]{
             font-weight: bold;
         }
+        ul {
+            list-style-type: none;
+        }
+        ul li {
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -46,21 +52,39 @@
         $(function () {
             $('#datetimepicker1').datetimepicker();
 
-            $("#id_plus21").click(function () {
-                if ($(this).is(":checked")) {
+            // $("#id_plus21").click(function () {
+            //     if ($(this).is(":checked")) {
+            //         $('.date').hide();
+            //         $('#id_date_of_birth').prop('required', false);
+            //         $('#id_date_of_birth').val('01/01/1950');
+            //         $('label[for="id_date_of_birth"]').hide();
+            //     } else {
+            //         $('.date').show();
+            //         $('#id_date_of_birth').val('');
+            //         $('#id_date_of_birth').prop('required', true);
+            //         $('label[for="id_date_of_birth"]').show();
+            //     }
+            // });
+
+            $('input:radio[name=plus21]').click(function(){
+                var inputValue = $(this).attr("value");
+                if (inputValue == "Yes"){
+                    console.log("Radio buttong YES value is :::::: " + inputValue);
                     $('.date').hide();
                     $('#id_date_of_birth').prop('required', false);
                     $('#id_date_of_birth').val('01/01/1950');
                     $('label[for="id_date_of_birth"]').hide();
-                } else {
+                }else{
+                    console.log("Radio buttong NO value is :::::: " + inputValue);
                     $('.date').show();
                     $('#id_date_of_birth').val('');
                     $('#id_date_of_birth').prop('required', true);
                     $('label[for="id_date_of_birth"]').show();
                 }
             });
+        
         });
-
+        
      </script>
 
 </body>
