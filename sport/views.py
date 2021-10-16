@@ -17,6 +17,9 @@ from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 import base64
 import time
+import pytz
+from django.utils import timezone
+from datetime import date, datetime
 
 def home(request):
     form = PlayerForm()
@@ -104,7 +107,28 @@ def getqrcode(request, id=None):
     return render(request, 'getqrcode.html', context)
                 
 
+def scanmenow(request, id=None):
+    try:
+        print('Scanining Player  ID :::::  {}'.format(id))
+        player = Player.objects.get(id=id)
+        # Create and save player in daliy_scan table
+        # scan_timestamp = models.DateTimeField(default=datetime.now(pytz.timezone('US/Central')))
+        # scan_timestamp = datetime.now(pytz.timezone('US/Central')) #pytz.timezone("US/Central")
+        # scan_timestamp = datetime.utcnow().replace(tzinfo=pytz.timezone('US/Central')) #(tzinfo=pytz.utc)        
+        # u = datetime.utcnow()
+        # u = u.replace(tzinfo=pytz.utc)
+        # tz = pytz.timezone('US/Central')
+        # dt_cst = u.astimezone(tz)
+        # scan_timestamp = models.DateTimeField(default=timezone.now)
 
+        daily_scan = Daily_Scan.objects.create(player=player)
+        print('Player scanned successfully ############## ')
+        messages.success(request, 'Player {} scanned successfully!'.format(player.first_name))
+    except Exception as e:
+        print('ERROR  :::::::: {}'.format(e))
+
+    return redirect(request.META['HTTP_REFERER'])
+    # return render(request)
 
 
 class PlayerList(ListView):

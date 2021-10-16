@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from datetime import date
+from datetime import date, datetime
 import barcode
 from barcode.writer import ImageWriter
 from io import BytesIO

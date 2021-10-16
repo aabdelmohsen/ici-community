@@ -24,6 +24,19 @@
   </div>
 </nav>
 
+{% if messages %}
+{% for message in messages %}
+    <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
+
 <div class="container">
     <h2>All Players</h2>
     <h5>Total count is: {{ object_list.count }}</h5>
@@ -38,6 +51,7 @@
           <th>Mobile</th>
           <th>Photo</th>
           <th>QR Code</th>
+          <th>Scan</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -47,8 +61,20 @@
                 <td>{{ player.first_name }}</td>
                 <td>{{ player.last_name }}</td>
                 <td>{{ player.mobile }}</td>
-                <td><a href="https://storage.googleapis.com/ici_community/{{ player.profile_picture }}" target="_blank" class="badge badge-info">View</a></td>
+                <td>
+                  <button type="button" class="btn btn-primary badge badge-info" data-toggle="modal" data-target="#myModal{{ player.id }}">View</button>
+                  <div id="myModal{{ player.id }}" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-body" width="430" height="300">
+                              <img src="https://storage.googleapis.com/ici_community/{{ player.profile_picture }}" width="430" height="300">
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
                 <td> <a href="/getqrcode/{{ player.id }}" target="_blank" class="badge badge-info">Generate</a> </td>
+                <td><a href="/scanmenow/{{ player.id }}" target="#" class="badge badge-info">Scan</a> </td>
             </tr>
         {% endfor %}
        
