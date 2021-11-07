@@ -20,6 +20,8 @@ import time
 import pytz
 from django.utils import timezone
 from datetime import date, datetime
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 def home(request):
     form = PlayerForm()
@@ -52,6 +54,8 @@ def home(request):
 
 
 def scanner(request):
+    if not request.user.is_authenticated:
+        return redirect('/login')
     scannerForm = ScannerForm()
     player = None
     print('Scanner In Progress :::::::::::::::::::')
@@ -131,10 +135,23 @@ def scanmenow(request, id=None):
     # return render(request)
 
 
+
 class PlayerList(ListView):
     model = Player
 
-    
+    @method_decorator(login_required(login_url='/login'))
+    def dispatch(self, *args, **kwargs):
+        return super(PlayerList, self).dispatch(*args, **kwargs)
+
+
+
+class Daily_ScanList(ListView):
+    model = Daily_Scan
+    queryset = Daily_Scan.objects.order_by('-scan_date')[:100]
+
+    @method_decorator(login_required(login_url='/login'))
+    def dispatch(self, *args, **kwargs):
+        return super(Daily_ScanList, self).dispatch(*args, **kwargs)  
 
 
 

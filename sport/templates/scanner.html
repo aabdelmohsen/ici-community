@@ -12,7 +12,7 @@
             &emsp;&emsp;&emsp;
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">ICI Registration</a>
+          <a class="nav-link" href="/" target="_blank">ICI Registration</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/scanner">ICI Scanner</a>
@@ -20,7 +20,16 @@
         <li class="nav-item">
           <a class="nav-link" href="/player_list">All Players</a>
         </li>
+        {% if user.is_authenticated %}
+            {% if user.get_username == 'aabdelmohsen' or user.get_username == 's_amer' or user.get_username == 'md_mamoon' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/daily_scan">Daily Scan</a>
+                </li>
+            {% endif %}
+        {% endif %}
       </ul>
+
+      <a class="nav-link" href="/logout">Logout</a>
     </div>
 </nav>
 
