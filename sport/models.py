@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone as u_timezone
 from pytz import timezone
 from datetime import date, datetime
 import barcode
@@ -57,7 +58,7 @@ class Player(models.Model):
     emergency_contact_name = models.CharField(max_length=250)
     emergency_contact_phone = models.CharField(max_length=100)
     profile_picture = models.ImageField(default='', upload_to=rename_profile_image)
-    registeration_date = models.DateTimeField(default=timezone.now)
+    registeration_date = models.DateTimeField(default=u_timezone.now)
     qr_code = models.CharField(max_length=20)
     disclaimer = models.BooleanField(default=False)
 
