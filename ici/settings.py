@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 #Session timeout time
@@ -181,6 +183,10 @@ STATICFILES_DIRS = [
 ]
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+# CORS_ORIGIN_ALLOW_ALL = True
+# ALLOWED_HOSTS=['http://127.0.0.1:8000']
+# CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:8000']
+# CORS_ORIGIN_ALLOW_ALL = False
 
 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
