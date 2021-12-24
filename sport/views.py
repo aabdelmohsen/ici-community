@@ -187,9 +187,22 @@ class PlayerList(ListView):
         value = self.request.GET.get('value', None)
         object_list = None
         if value is not None:
-            print(f"Filter using session value ::: {value}")
-            object_list = Player.objects.filter(Q(first_name__istartswith=value) \
-                | Q(last_name__istartswith=value) | Q(mobile__istartswith=value))
+            if value == '' or value == ' ':
+                print('No filter yet, getting first 20 record')
+                object_list = Player.objects.all()[:20]
+            else:
+                if ' ' in value:
+                    print("With Spacessssss !!!!!!")
+                    names = value.split()
+                    print(f"Filter using session value ::: {value}")
+                    object_list = Player.objects.filter(Q(first_name__istartswith=names[0]) \
+                    | Q(last_name__istartswith=names[1]) | Q(mobile__istartswith=value))
+                else:
+                    print("No Spacessssss !!!!!!")
+                    print(f"Filter using session value ::: {value}")
+                    object_list = Player.objects.filter(Q(first_name__istartswith=value) \
+                    | Q(last_name__istartswith=value) | Q(mobile__istartswith=value))
+
         else:
             value = ''
             print('No filter yet, getting first 20 record')
@@ -215,7 +228,7 @@ class Daily_ScanList(ListView):
         object_list = None
         count = ''
         if value is not None:
-            if value is '' or value is ' ':
+            if value == '' or value == ' ':
                 print('Filter is empty, getting first 15 record')
                 object_list = Daily_Scan.objects.order_by('-scan_date')[:15]
                 count = len(object_list)

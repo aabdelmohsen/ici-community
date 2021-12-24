@@ -36,6 +36,7 @@
 <div class="container">
     <h2>Daily Scanning</h2>
     <h5>Total count is: {{ count }}</h5>
+    Note: Please press enter while searching .....
     <input class="form-control" id="myInput" type="text" value="{{filter_date}}" placeholder="Search..">
     <br>
     <table class="table table-bordered table-striped">
@@ -75,27 +76,55 @@
     const length = myInput.value.length;
     myInput.setSelectionRange(length, length);
 
-    $("#myInput").on("keyup", function() {
 
-      var value = $(this).val();
-      console.log("filter value is :::" + value);
-      var url = window.location.href;
-      flag = url.includes("?value=")
+    myInput.addEventListener("keyup", function(event) {
 
-      if(flag){
-        console.log("url contains value ::: " + flag)
-        myArray = url.split("?");
-        mainUrl = myArray[0]
-        console.log("split url ::: " + mainUrl)
-        url = mainUrl + "?value=" + value;
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        var value = $(this).val();
+        console.log("filter value is :::" + value);
+        var url = window.location.href;
+        flag = url.includes("?value=")
+
+        if(flag){
+          console.log("url contains value ::: " + flag)
+          myArray = url.split("?");
+          mainUrl = myArray[0]
+          console.log("split url ::: " + mainUrl)
+          url = mainUrl + "?value=" + value;
+        }
+
+        if(!flag){
+          url = window.location + "?value=" + value;
+        }
+
+        window.location = url;
+
       }
-
-      if(!flag){
-        url = window.location + "?value=" + value;
-      }
-
-      window.location = url;
     });
+
+    // $("#myInput").on("keyup", function() {
+
+    //   var value = $(this).val();
+    //   console.log("filter value is :::" + value);
+    //   var url = window.location.href;
+    //   flag = url.includes("?value=")
+
+    //   if(flag){
+    //     console.log("url contains value ::: " + flag)
+    //     myArray = url.split("?");
+    //     mainUrl = myArray[0]
+    //     console.log("split url ::: " + mainUrl)
+    //     url = mainUrl + "?value=" + value;
+    //   }
+
+    //   if(!flag){
+    //     url = window.location + "?value=" + value;
+    //   }
+
+    //   window.location = url;
+    // });
+
 
     // $("#myInput").on("keyup", function() {
     //   var value = $(this).val().toLowerCase();
@@ -103,7 +132,7 @@
     //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     //   });
     // });
-    
+
   });
   </script>
   
