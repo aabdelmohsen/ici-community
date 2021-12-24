@@ -10,4 +10,7 @@ urlpatterns = [
     path('getqrcode/<int:id>/', views.getqrcode, name='getqrcode'),
     path('scanmenow/<int:id>/', views.scanmenow, name='scanmenow'),
     path('daily_scan/', Daily_ScanList.as_view(), name='daily_scan'),
+    # path('daily_scan_filter/<str:date>/', views.daily_scan_filter, name='daily_scan_filter'),
+    # path('players_filter/', views.players_filter, name='players_filter'),
+    # path('test_filter/', views.test_filter, name='test_filter'),
 ]

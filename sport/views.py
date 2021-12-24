@@ -22,6 +22,8 @@ from django.utils import timezone
 from datetime import date, datetime
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.db.models import Q, FilteredRelation
+from django.db.models.functions import Lower
 
 def home(request):
     form = PlayerForm()
@@ -135,19 +137,102 @@ def scanmenow(request, id=None):
     # return render(request)
 
 
+# def players_filter(request):
+#     try:
+#         # global players_filter_data
+#         players_filter_data = request.GET.get('value', None)
+#         request.session['players_filter_data'] = players_filter_data
+#         print('players_filter value :::::  {}'.format(request.session.get('players_filter_data')))
+#         context = {
+#         'players_filter_data' : players_filter_data
+#         }
+#         # render(request, 'player_list.html', context)
+#         return HttpResponse('success')
+#     except Exception as e:
+#         print('ERROR  :::::::: {}'.format(e))
+
+
+# def test_filter(request):
+#     try:
+#         value  = request.session.get('players_filter_data')
+#         return HttpResponse(f'players_filter_data : {value}')
+#     except Exception as e:
+#         print('ERROR  :::::::: {}'.format(e))
+
+# def daily_scan_filter(request, date=None):
+#     try:
+#         print('daily_scan_filter date :::::  {}'.format(date))
+#         global daily_scan_filter_date
+#         daily_scan_filter_date = date
+#     except Exception as e:
+#         print('ERROR  :::::::: {}'.format(e))
+
+
+def get_cst_date():
+    date_format = "%Y-%m-%d"
+    # Current time in UTC
+    now_utc = datetime.now(timezone('UTC'))
+    # Convert to central America/Chicago time zone
+    now_central_date = now_utc.astimezone(timezone('America/Chicago'))
+    db_date = now_central_date.strftime(date_format) 
+    print(f"view daily scan date: {db_date}")
+    return db_date
+
 
 class PlayerList(ListView):
     model = Player
+    
+    def get_context_data(self, **kwargs):
+        context = super(PlayerList, self).get_context_data(**kwargs)
+        value = self.request.GET.get('value', None)
+        object_list = None
+        if value is not None:
+            print(f"Filter using session value ::: {value}")
+            object_list = Player.objects.filter(Q(first_name__istartswith=value) \
+                | Q(last_name__istartswith=value) | Q(mobile__istartswith=value))
+        else:
+            value = ''
+            print('No filter yet, getting first 20 record')
+            object_list = Player.objects.all()[:20]
+
+        player_total_count = Player.objects.count()
+        context.update({'value': value})
+        context.update({'player_total_count': player_total_count})
+        context.update({'object_list': object_list})
+        return context
 
     @method_decorator(login_required(login_url='/login'))
     def dispatch(self, *args, **kwargs):
         return super(PlayerList, self).dispatch(*args, **kwargs)
 
 
-
 class Daily_ScanList(ListView):
     model = Daily_Scan
-    queryset = Daily_Scan.objects.order_by('-scan_date')[:100]
+
+    def get_context_data(self, **kwargs):
+        context = super(Daily_ScanList, self).get_context_data(**kwargs)
+        value = self.request.GET.get('value', None)
+        object_list = None
+        count = ''
+        if value is not None:
+            if value is '' or value is ' ':
+                print('Filter is empty, getting first 15 record')
+                object_list = Daily_Scan.objects.order_by('-scan_date')[:15]
+                count = len(object_list)
+            else:
+                print(f"Filter using session value ::: {value}")
+                object_list = Daily_Scan.objects.filter(Q(scan_date__istartswith=value))
+                count = len(object_list)
+        else:
+            value = ''
+            print('No filter yet, getting first 15 record')
+            object_list = Daily_Scan.objects.order_by('-scan_date')[:15]
+            count = len(object_list)
+
+        context.update({'filter_date': value})
+        context.update({'count': count})
+        context.update({'object_list': object_list})
+        return context
 
     @method_decorator(login_required(login_url='/login'))
     def dispatch(self, *args, **kwargs):
